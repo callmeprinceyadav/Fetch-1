@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Data Storage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    form {
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<h2>User Details</h2>
+
+<form id="userDataForm">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name"><br><br>
+  
+  <label for="age">Age:</label>
+  <input type="number" id="age" name="age" max="150"><br><br>
+  
+  <input type="submit" value="Submit">
+</form>
+
+<button id="retrieveData">Retrieve and Display Data</button>
+
+<div id="displayData">
+  <!-- Data will be displayed here -->
+</div>
+
+<script>
+  const form = document.getElementById('userDataForm');
+  const retrieveButton = document.getElementById('retrieveData');
+  const displayArea = document.getElementById('displayData');
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const age = document.getElementById('age').value;
+
+    if (name && age) {
+      const userData = {
+        name: name,
+        age: age
+      };
+
+      localStorage.setItem('userData', JSON.stringify(userData));
+
+      form.reset();
+      alert('Data stored successfully!');
+    } else {
+      alert('Please enter both name and age.');
+    }
+  });
+
+  retrieveButton.addEventListener('click', function() {
+    const storedData = JSON.parse(localStorage.getItem('userData'));
+
+    if (storedData) {
+      displayArea.innerHTML = `
+        <h3>Stored User Data</h3>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+          </tr>
+          <tr>
+            <td>${storedData.name}</td>
+            <td>${storedData.age}</td>
+          </tr>
+        </table>
+      `;
+    } else {
+      displayArea.innerHTML = '<p>No stored data found.</p>';
+    }
+  });
+</script>
+
+</body>
+</html>

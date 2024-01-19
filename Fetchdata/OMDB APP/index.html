@@ -1,0 +1,27 @@
+// index.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 1px solid black;
+        padding: 20px;
+        margin: 20px;
+      }
+    </style>
+    <title>OMDB API</title>
+  </head>
+  <body>
+    <h1>OMDB MOVIES</h1>
+    <input type="text" id="searchParam" />
+    <button onclick="getData()">Search</button>
+    <div id="container"></div>
+    <script src="index.js"></script>
+  </body>
+</html>
